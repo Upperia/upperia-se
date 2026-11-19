@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Upperia — egna appar, sajter och digitala produkter</title>
-<meta name="description" content="Upperia är Per Håkanssons enskilda firma utanför Uppsala. Här byggs och drivs egna digitala produkter: Coachtavlan, Zonodlaren, appar på Google Play och automatiserade innehållssajter.">
+<meta name="description" content="Upperia är Per Håkanssons enskilda firma utanför Uppsala. Egna produkter i drift — Coachtavlan, Zonodlaren och appar på Google Play — och uppdrag åt företag som vill ha något eget byggt.">
 <link rel="canonical" href="https://upperia.se/">
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="sv_SE">
 <meta property="og:site_name" content="Upperia">
 <meta property="og:title" content="Upperia — egna appar, sajter och digitala produkter">
-<meta property="og:description" content="Egna digitala produkter byggda och drivna i egen regi — Coachtavlan, Zonodlaren, appar och innehållssajter.">
+<meta property="og:description" content="Egna produkter i drift, och uppdrag åt företag som vill ha något eget byggt.">
 <meta property="og:url" content="https://upperia.se/">
 <meta property="og:image" content="https://upperia.se/upperia-logo.png">
 <meta name="theme-color" content="#F4F3F0">
@@ -355,14 +355,32 @@ a.pitem:hover .pitem-go{color:var(--void)}
   .pitem-go{padding-top:16px}
 }
 
-/* uppdrag — nedtonad rad */
-.gig{
-  border:1px solid var(--hair);padding:clamp(26px,3.4vw,46px);
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:center;
+/* uppdrag — numrerad typografisk rad */
+.craft{margin-top:clamp(48px,6vw,84px);border-top:1px solid var(--hair-inv)}
+.craft-row{
+  display:grid;grid-template-columns:minmax(0,5.5rem) minmax(0,15rem) minmax(0,1fr);
+  gap:clamp(16px,3vw,56px);align-items:baseline;
+  padding:clamp(28px,3.4vw,44px) 0;border-bottom:1px solid var(--hair-inv);
 }
-.gig p{margin:0;color:#44454C}
-.gig p + p{margin-top:14px}
-@media(max-width:760px){.gig{grid-template-columns:1fr}}
+.craft-num{
+  font-family:var(--display);font-weight:200;font-size:clamp(2rem,4vw,3.1rem);
+  line-height:1;color:rgba(244,243,240,.22);letter-spacing:-.01em;
+}
+.craft-name{
+  font-family:var(--display);font-weight:300;font-size:clamp(1.2rem,2.2vw,1.5rem);
+  color:var(--pearl);margin:0;
+}
+.craft-row p{margin:0;color:rgba(244,243,240,.6);font-size:1rem;max-width:56ch}
+.craft-foot{
+  margin-top:clamp(40px,5vw,64px);display:flex;flex-wrap:wrap;gap:clamp(20px,3vw,48px);
+  align-items:center;justify-content:space-between;
+}
+.craft-foot p{margin:0;color:rgba(244,243,240,.6);max-width:52ch}
+#uppdrag + #kontakt{border-top:1px solid var(--hair-inv)}
+@media(max-width:780px){
+  .craft-row{grid-template-columns:minmax(0,3.4rem) minmax(0,1fr);row-gap:10px}
+  .craft-row p{grid-column:2}
+}
 .case{
   border:1px solid var(--hair-inv);padding:clamp(26px,3.2vw,42px);position:relative;overflow:hidden;
   transition:border-color .5s ease,background .5s ease;transform-style:preserve-3d;will-change:transform;
@@ -481,9 +499,8 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity 1s cubic-bezier(.76,0
     </a>
     <nav class="nav-links">
       <a href="#produkter">Produkter</a>
-      <a href="#bygge">Under bygge</a>
-      <a href="#om">Om mig</a>
       <a href="#uppdrag">Uppdrag</a>
+      <a href="#om">Om mig</a>
     </nav>
     <a class="nav-cta" href="#kontakt">Kontakt</a>
   </div>
@@ -499,7 +516,7 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity 1s cubic-bezier(.76,0
     <div class="wrap hero-in">
       <span class="label">Webb &nbsp;|&nbsp; Appar &nbsp;|&nbsp; Digitala lösningar</span>
       <h1 data-split>Jag bygger och driver mina egna produkter.</h1>
-      <p class="lead">Upperia är min enskilda firma utanför Uppsala. Här byggs appar, butiker och innehållssajter som går att använda på riktigt — hela vägen från första raden kod till drift, betalningar och support.</p>
+      <p class="lead">Upperia är min enskilda firma utanför Uppsala. Jag bygger egna produkter som folk betalar för och använder varje vecka — och tar uppdrag åt företag som vill ha något eget byggt, inte en mall.</p>
 
       <div class="hero-actions">
         <a class="btn btn-fill" href="#produkter" data-magnet><span>Se produkterna</span></a>
@@ -508,12 +525,12 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity 1s cubic-bezier(.76,0
 
       <div class="figures">
         <div class="fig rv">
-          <div class="n"><span data-count="7">7</span></div>
+          <div class="n"><span data-count="3">3</span></div>
           <div class="t">Egna produkter i drift</div>
         </div>
         <div class="fig rv">
-          <div class="n"><span data-count="4">4</span></div>
-          <div class="t">Under bygge just nu</div>
+          <div class="n"><span data-count="15">15</span><sup>ÅR</sup></div>
+          <div class="t">Som konstruktör innan koden</div>
         </div>
         <div class="fig rv">
           <div class="n"><span data-count="1">1</span></div>
@@ -526,8 +543,8 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity 1s cubic-bezier(.76,0
   <!-- ============ LÖPANDE BAND ============ -->
   <div class="band" aria-hidden="true">
     <div class="band-track">
-      <span>Coachtavlan</span><span>Zonodlaren</span><span>Renovation Planner</span><span>Essay Zoo</span><span>answer-to-question</span><span>MindUnlocked</span>
-      <span>Coachtavlan</span><span>Zonodlaren</span><span>Renovation Planner</span><span>Essay Zoo</span><span>answer-to-question</span><span>MindUnlocked</span>
+      <span>Coachtavlan</span><span>Zonodlaren</span><span>Renovation Planner</span><span>Hemsidor</span><span>System</span><span>Appar</span>
+      <span>Coachtavlan</span><span>Zonodlaren</span><span>Renovation Planner</span><span>Hemsidor</span><span>System</span><span>Appar</span>
     </div>
   </div>
 
@@ -537,7 +554,7 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity 1s cubic-bezier(.76,0
       <div class="head rv">
         <span class="label">Produkter</span>
         <h2>Det här ligger uppe och går.</h2>
-        <p class="lead">Sju egna produkter i drift — appar, butiker och sajter som andra använder och betalar för. Allt byggt, driftsatt och underhållet av mig.</p>
+        <p class="lead">Tre produkter som andra använder och betalar för. Byggda, driftsatta och underhållna av mig, från första raden kod till supportmejlen.</p>
       </div>
 
       <div class="plist">
@@ -561,16 +578,6 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity 1s cubic-bezier(.76,0
           <span class="pitem-go">zonodlaren.se <span aria-hidden="true">&#8594;</span></span>
         </a>
 
-        <a class="pitem rv" href="https://answer-to-question.com" target="_blank" rel="noopener">
-          <span class="pitem-kind">Innehållssajt</span>
-          <div class="pitem-body">
-            <h3 class="pitem-name">answer-to-question.com</h3>
-            <p>Serverrenderad från en databas. En ny artikel skrivs och publiceras automatiskt varje dag, och materialet sprids vidare till Pinterest utan att jag rör det.</p>
-            <p class="pitem-meta">Supabase · Netlify · Claude API</p>
-          </div>
-          <span class="pitem-go">answer-to-question.com <span aria-hidden="true">&#8594;</span></span>
-        </a>
-
         <a class="pitem rv" href="https://play.google.com/store/apps/details?id=se.upperia.renovering" target="_blank" rel="noopener">
           <span class="pitem-kind">Android-app</span>
           <div class="pitem-body">
@@ -580,106 +587,6 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity 1s cubic-bezier(.76,0
           </div>
           <span class="pitem-go">Google Play <span aria-hidden="true">&#8594;</span></span>
         </a>
-
-        <div class="pitem rv">
-          <span class="pitem-kind">YouTube</span>
-          <div class="pitem-body">
-            <h3 class="pitem-name">Essay Zoo</h3>
-            <p>Djurklipp där en AI-röst läser påhittade, lite virriga skoluppsatser om djuret. Tre nya klipp om dagen, producerade och schemalagda helt automatiskt.</p>
-            <p class="pitem-meta">Engelskspråkig · automatiserad produktion</p>
-          </div>
-          <span class="pitem-go">I drift</span>
-        </div>
-
-        <div class="pitem rv">
-          <span class="pitem-kind">YouTube</span>
-          <div class="pitem-body">
-            <h3 class="pitem-name">MindUnlocked</h3>
-            <p>Kanal om psykologi och mindset. Hela kedjan är automatiserad — manus, röst, klippning, musik och schemalagd publicering — och styrs om efter vad statistiken säger fungerar.</p>
-            <p class="pitem-meta">Engelskspråkig · automatiserad produktion</p>
-          </div>
-          <span class="pitem-go">I drift</span>
-        </div>
-
-        <div class="pitem rv">
-          <span class="pitem-kind">Mallar</span>
-          <div class="pitem-body">
-            <h3 class="pitem-name">Smartbudget Sverige</h3>
-            <p>Fem svenska budgetmallar i Excel — månadsbudget, familjebudget, sparmål, skuldfri och abonnemang — som säljs som nedladdning på Etsy.</p>
-            <p class="pitem-meta">Etsy · nedladdning</p>
-          </div>
-          <span class="pitem-go">I drift</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ UNDER BYGGE (MÖRK AKT) ============ -->
-  <section id="bygge" class="dark">
-    <img class="watermark-dark" src="data:image/png;base64,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" alt="" aria-hidden="true">
-    <div class="wrap">
-      <div class="head rv">
-        <span class="label">Under bygge</span>
-        <h2>Nästa omgång.</h2>
-        <p class="lead">Fyra saker som håller på att bli något. De börjar alltid som ett problem jag själv har, och släpps vidare först när de löser det ordentligt.</p>
-      </div>
-
-      <div class="live rv">
-        <div class="live-card">
-          <span class="live-kind">App</span>
-          <span class="live-name">Skafferiet</span>
-          <p>Håller reda på vad som finns i skafferiet och bygger inköpslistan av sig själv när något börjar ta slut. Matsedel och recept ovanpå, samma data i mobilen och på datorn.</p>
-          <span class="live-go">Under arbete</span>
-        </div>
-
-        <div class="live-card">
-          <span class="live-kind">App</span>
-          <span class="live-name">Chores</span>
-          <p>Hushållssysslor schemalagda per vecka och månad, fördelade mellan dem som bor i hemmet, med statistik så att bördan hålls jämn. Byggs för en internationell marknad.</p>
-          <span class="live-go">Under arbete</span>
-        </div>
-
-        <div class="live-card">
-          <span class="live-kind">App</span>
-          <span class="live-name">Aktiekompassen</span>
-          <p>Koll på den egna aktieportföljen med de nyckeltal jag själv tycker är relevanta, och köp- och säljgränser jag sätter själv. Kurser och nyckeltal hämtas automatiskt.</p>
-          <span class="live-go">Under arbete</span>
-        </div>
-
-        <div class="live-card">
-          <span class="live-kind">Sajt</span>
-          <span class="live-name">Regelsajten</span>
-          <p>Fiskeregler och fiskekort samlade per sjö och fiskevårdsområde, så att man slipper leta på fem ställen innan man kör ut.</p>
-          <span class="live-go">Under arbete</span>
-        </div>
-      </div>
-
-      <div class="work-split" style="margin-top:clamp(56px,7vw,96px)">
-        <div class="rv">
-          <span class="label">Grunden</span>
-          <h3 style="font-size:clamp(1.5rem,3vw,2.1rem);margin-bottom:18px">Samma stack varje gång.</h3>
-          <p class="panel-cap">Supabase för data och inloggning, Netlify för drift, Stripe för betalningar och Google Play för apparna. Att allt står på samma grund gör att nästa bygge kan återanvända förra bygget i stället för att börja om.</p>
-          <p class="panel-cap" style="margin-top:18px">Och så mycket som möjligt automatiseras bort — artiklar, inlägg och videor publiceras av sig själva, så att tiden går till att bygga nästa sak i stället för att sköta den förra.</p>
-        </div>
-
-        <div class="rv">
-          <div class="panel" aria-hidden="true">
-            <div class="panel-top"><strong>Drift</strong><em>Just nu</em></div>
-            <div class="prow">
-              <div><div class="prow-n">Coachtavlan</div><div class="prow-m">Betalningar öppna</div></div>
-              <div class="tag is-sold" data-tag>Live</div>
-            </div>
-            <div class="prow">
-              <div><div class="prow-n">Zonodlaren</div><div class="prow-m">Sajt, app och Etsy</div></div>
-              <div class="tag is-sold" data-tag>Live</div>
-            </div>
-            <div class="prow">
-              <div><div class="prow-n">answer-to-question</div><div class="prow-m">Ny artikel varje dag</div></div>
-              <div class="tag is-res" data-tag>Automatisk</div>
-            </div>
-            <div class="panel-foot"><span class="pulse"></span><span>Allt på egen drift</span></div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -704,21 +611,39 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity 1s cubic-bezier(.76,0
   </section>
 
   <!-- ============ UPPDRAG ============ -->
-  <section id="uppdrag">
+  <section id="uppdrag" class="dark">
     <div class="wrap">
       <div class="head rv">
         <span class="label">Uppdrag</span>
-        <h2>Tar jag externa jobb?</h2>
+        <h2>Samma händer, åt dig.</h2>
+        <p class="lead">Jag tar några uppdrag i taget vid sidan av mina egna produkter. Det blir samma sak som du ser ovanför — byggt från grunden, inte en mall med din logga i hörnet.</p>
       </div>
-      <div class="gig rv">
-        <div>
-          <p>Ibland. Jag har pausat att bygga hemsidor åt företag för att hinna med mina egna produkter, så jag söker inga nya uppdrag just nu.</p>
-          <p>Hör ändå av dig om du har något som passar — helst ett system eller en app där bygget liknar det jag redan håller på med. Jag svarar rakt ut om jag inte hinner.</p>
+
+      <div class="craft rv">
+
+        <div class="craft-row">
+          <span class="craft-num">01</span>
+          <h3 class="craft-name">Sajten</h3>
+          <p>En sida som laddar direkt, fungerar i mobilen och säger vad företaget faktiskt gör. Ingen temamall, inga tolv insticksmoduler som går sönder vid nästa uppdatering.</p>
         </div>
-        <div>
-          <p class="panel-cap" style="color:#44454C;margin:0">Vill du se vad en adminpanel kan vara, finns en demo att klicka runt i.</p>
-          <p style="margin-top:18px"><a class="btn" href="demo.html" data-magnet><span>Prova demon</span></a></p>
+
+        <div class="craft-row">
+          <span class="craft-num">02</span>
+          <h3 class="craft-name">Systemet</h3>
+          <p>Bokningar, lager, kundregister — det ni håller reda på i ett kalkylark idag, som en riktig app med inloggning, behörigheter och en adminpanel som tål att användas dagligen.</p>
         </div>
+
+        <div class="craft-row">
+          <span class="craft-num">03</span>
+          <h3 class="craft-name">Appen</h3>
+          <p>En app på Google Play, eller en webbapp som beter sig som en app i telefonen. Precis det jag byggt åt mig själv, och som ligger uppe och går.</p>
+        </div>
+
+      </div>
+
+      <div class="craft-foot rv">
+        <p>Mejla vad du vill ha gjort, så får du ett rakt besked om jag hinner och vad det landar på. Hinner jag inte säger jag det direkt.</p>
+        <a class="btn" href="mailto:per@upperia.se" data-magnet><span>per@upperia.se</span></a>
       </div>
     </div>
   </section>
@@ -939,7 +864,6 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity 1s cubic-bezier(.76,0
   "owns": [
     { "@type": "SoftwareApplication", "name": "Coachtavlan", "url": "https://coachtavlan.se", "applicationCategory": "SportsApplication" },
     { "@type": "WebSite", "name": "Zonodlaren", "url": "https://zonodlaren.se" },
-    { "@type": "WebSite", "name": "answer-to-question.com", "url": "https://answer-to-question.com" },
     { "@type": "MobileApplication", "name": "Renovation Planner: Materials", "url": "https://play.google.com/store/apps/details?id=se.upperia.renovering", "operatingSystem": "Android" }
   ]
 }
