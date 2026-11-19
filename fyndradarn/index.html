@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c1a1d">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Fyndradarn – filma loppisbord och få larm när något är värt mer än din gräns.">
+<title>Fyndradarn</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<main id="app" class="is-idle">
+  <video id="cam" playsinline muted autoplay></video>
+  <div id="frame" aria-hidden="true"><i></i><i></i><i></i><i></i><b class="sweep"></b></div>
+  <div id="tapring" aria-hidden="true"></div>
+
+  <header id="top">
+    <div class="brand">
+      <svg viewBox="0 0 32 32" class="logo" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="2" opacity=".35"/><circle cx="16" cy="16" r="8.5" fill="none" stroke="currentColor" stroke-width="2" opacity=".6"/><path d="M16 16 L27 9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="22.5" cy="20.5" r="3" fill="#f3b941"/></svg>
+      <span>Fyndradarn</span>
+    </div>
+    <div class="top-right">
+      <button id="torchBtn" class="iconbtn" hidden aria-label="Ficklampa"><svg viewBox="0 0 24 24"><path d="M8 2h8l-1 6H9L8 2zm1 7h6v4l-1.5 2v7h-3v-7L9 13V9z" fill="currentColor"/></svg></button>
+      <button id="thrChip" class="chip" aria-label="Ändra larmgräns">Larm <b id="thrText">500 kr</b></button>
+      <div id="status" class="status" role="status"><span class="dot"></span><span id="statusText">Redo</span></div>
+    </div>
+  </header>
+
+  <section id="alerts" aria-live="assertive"></section>
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <section id="sheet" aria-live="polite">
+    <div class="sheet-head">
+      <h2>I bild nu</h2>
+      <span id="meter" class="meter">0 analyser · 0 kr</span>
+    </div>
+    <ul id="nowList" class="itemlist"></ul>
+    <p id="nowEmpty" class="empty">Rikta kameran mot ett bord och håll stilla en halv sekund.</p>
+  </section>
+
+  <nav id="controls">
+    <button id="logBtn" class="navbtn" aria-label="Fynd">
+      <svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4V3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      <span>Fynd</span><em id="logCount" class="badge" hidden>0</em>
+    </button>
+    <button id="mainBtn" class="mainbtn" aria-label="Starta">
+      <span class="ring"></span>
+      <svg class="ico-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+      <svg class="ico-pause" viewBox="0 0 24 24"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg>
+    </button>
+    <button id="setBtn" class="navbtn" aria-label="Inställningar">
+      <svg viewBox="0 0 24 24"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zm7.4-2.5a7.5 7.5 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.6 7.6 0 0 0-1.7-1L15 3.5h-4l-.3 2.5a7.6 7.6 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.5 7.5 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.6 7.6 0 0 0 1.7 1l.3 2.5h4l.3-2.5a7.6 7.6 0 0 0 1.7-1l2.4 1 2-3.4-2-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      <span>Inställningar</span>
+    </button>
+  </nav>
+
+  <!-- Startskärm -->
+  <section id="start" class="overlay start">
+    <div class="start-inner">
+      <svg viewBox="0 0 120 120" class="hero" aria-hidden="true">
+        <circle cx="60" cy="60" r="54" fill="none" stroke="#3fb8a9" stroke-width="3" opacity=".25"/>
+        <circle cx="60" cy="60" r="36" fill="none" stroke="#3fb8a9" stroke-width="3" opacity=".45"/>
+        <circle cx="60" cy="60" r="18" fill="none" stroke="#3fb8a9" stroke-width="3" opacity=".7"/>
+        <path d="M60 60 L104 34" stroke="#3fb8a9" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="84" cy="78" r="8" fill="#f3b941"/>
+      </svg>
+      <h1>Fyndradarn</h1>
+      <p class="lead">Filma loppisborden. Appen känner igen sakerna, kollar vad de säljs för och larmar när något är värt mer än din gräns.</p>
+
+      <div id="keyBox" class="keybox" hidden>
+        <label for="keyInput">Åtkomstnyckel</label>
+        <div class="row"><input id="keyInput" autocomplete="off" spellcheck="false" placeholder="fr_…"><button id="keySave" class="btn ghost">Spara</button></div>
+        <p class="fine">Nyckeln finns i länken du fick. Den sparas bara i den här telefonen.</p>
+      </div>
+
+      <div class="thrpick">
+        <span class="label">Larma när något är värt mer än</span>
+        <div class="chips" id="startChips"></div>
+      </div>
+
+      <button id="startBtn" class="btn primary big">Starta kameran</button>
+      <p id="startErr" class="err" hidden></p>
+
+      <ul class="tips">
+        <li><b>Gå lugnt</b> och håll stilla en halv sekund vid varje bord.</li>
+        <li><b>Tryck på skärmen</b> för en noggrann närbild, till exempel av en stämpel.</li>
+        <li><b>Vänd på porslin och glas</b> när appen ber om det – värdet sitter ofta i stämpeln.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Panel: larmgräns -->
+  <section id="thrPanel" class="overlay panel" hidden>
+    <div class="panel-card">
+      <header><h2>Larmgräns</h2><button class="close" data-close aria-label="Stäng">×</button></header>
+      <p class="muted">Du får larm när något troligen är värt mer än:</p>
+      <div class="thr-big">
+        <button class="step" data-step="-1" aria-label="Lägre">−</button>
+        <div><input id="thrInput" type="number" inputmode="numeric" min="50" step="50"><span>kr</span></div>
+        <button class="step" data-step="1" aria-label="Högre">+</button>
+      </div>
+      <div class="chips" id="panelChips"></div>
+    </div>
+  </section>
+
+  <!-- Panel: inställningar -->
+  <section id="setPanel" class="overlay panel" hidden>
+    <div class="panel-card">
+      <header><h2>Inställningar</h2><button class="close" data-close aria-label="Stäng">×</button></header>
+      <div class="setlist">
+        <label class="sw"><span><b>Kolla sålda priser automatiskt</b><small>När något verkar ligga över gränsen söker appen upp sålda exemplar (ca 0,75 kr per koll).</small></span><input type="checkbox" id="optVerify"><i></i></label>
+        <label class="sw"><span><b>Ljud</b><small>Pling vid fynd.</small></span><input type="checkbox" id="optSound"><i></i></label>
+        <label class="sw"><span><b>Vibration</b><small>Surrar vid fynd.</small></span><input type="checkbox" id="optVibrate"><i></i></label>
+        <label class="sw"><span><b>Läs upp fynd</b><small>Bra med hörlurar.</small></span><input type="checkbox" id="optVoice"><i></i></label>
+        <div class="seg-wrap">
+          <b>Skanningstakt</b>
+          <div class="seg" id="optSpeed">
+            <button data-v="spar">Sparsam</button><button data-v="normal">Normal</button><button data-v="snabb">Snabb</button>
+          </div>
+          <small id="speedHint" class="muted"></small>
+        </div>
+        <div class="usage" id="usageBox">
+          <b>AI-kostnad</b>
+          <div class="usage-grid">
+            <div><span id="useToday">–</span><small>idag</small></div>
+            <div><span id="useMonth">–</span><small>denna månad</small></div>
+            <div><span id="useSession">–</span><small>den här rundan</small></div>
+          </div>
+          <small id="useBudget" class="muted"></small>
+        </div>
+        <div class="row gap">
+          <button id="testAlarm" class="btn ghost">Testa larmet</button>
+          <button id="notifBtn" class="btn ghost">Tillåt notiser</button>
+        </div>
+        <details class="keydetails">
+          <summary>Åtkomstnyckel</summary>
+          <div class="row"><input id="keyEdit" autocomplete="off" spellcheck="false"><button id="keyEditSave" class="btn ghost">Spara</button></div>
+        </details>
+        <p class="fine">Fyndradarn version <span id="ver"></span>. Värdena är uppskattningar från AI och sökningar på nätet – kontrollera alltid själv innan du köper något dyrt.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Panel: fynd -->
+  <section id="logPanel" class="overlay panel" hidden>
+    <div class="panel-card tall">
+      <header><h2>Fynd</h2><button class="close" data-close aria-label="Stäng">×</button></header>
+      <div class="seg tabs" id="logTabs"><button data-v="fynd" class="on">Sparade fynd</button><button data-v="sett">Allt jag sett</button></div>
+      <ul id="logList" class="itemlist big"></ul>
+      <p id="logEmpty" class="empty"></p>
+      <div class="row gap end"><button id="logClear" class="btn ghost small">Rensa listan</button></div>
+    </div>
+  </section>
+
+  <!-- Panel: detaljer -->
+  <section id="detPanel" class="overlay panel" hidden>
+    <div class="panel-card tall">
+      <header><h2 id="detTitle">Föremål</h2><button class="close" data-close aria-label="Stäng">×</button></header>
+      <div id="detBody"></div>
+    </div>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
